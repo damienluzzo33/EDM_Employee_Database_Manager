@@ -1,6 +1,6 @@
 USE my_employees
 
-INSERT INTO departments (name)
+INSERT INTO departments (dept_name)
 VALUES ("HR"),
 ("Engineering"),
 ("Management");
