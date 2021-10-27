@@ -1,4 +1,4 @@
-USE my_employees
+USE my_employees;
 
 INSERT INTO departments (dept_name)
 VALUES ("HR"),

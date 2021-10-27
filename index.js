@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-const { queryAllFrom, addDataTo, updateDataIn, getEmployeeNames, getRoleTitles, deleteDataFrom, getDeptNames } = require("./helpers/queries");
+const { queryAllFrom, addDataTo, updateDataIn, getEmployeeNames, getRoleTitles, deleteDataFrom, getDeptNames, getManagerNames, queryManagerByEmployee, queryEmployeeByDepartment } = require("./helpers/queries");
+const { getAllManagers } = require('./helpers/queryStatements');
 
 // create function to run as soon as the application is ran
 function start() {
@@ -251,11 +252,33 @@ async function deleteDepartment() {
 }
 // create function to allow user to view employees by manager
 function employeesByManager() {
-// TODO - FINISH THIS FUNCTION
+	const currentManagers = await getManagerNames();
+	inquirer
+		.prompt([
+			{
+				type: "list",
+				name: "manager",
+				message: "Which manager's employees would you like to view? ",
+				options: currentManagers
+			}
+		]).then((response) => {
+			queryManagerByEmployee(response);
+		})
 }
 // create function to allow user to view employees by department
 function employeesByDept() {
-// TODO - FINISH THIS FUNCTION
+	const currentDepartments = await getDeptNames();
+	inquirer
+		.prompt([
+			{
+				type: "list",
+				name: "department",
+				message: "Which department's employees would you like to view? ",
+				options: currentDepartments
+			}
+		]).then((response) => {
+			queryEmployeeByDepartment(response);
+		})
 }
 // create function to allow the user to see the utilized budget for each department
 function utilizedBudget() {
