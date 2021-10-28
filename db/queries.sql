@@ -67,3 +67,6 @@ SELECT e.first_name, e.last_name, r.title FROM employees JOIN roles r ON e.role_
 
 -- view employees by department
 SELECT e.first_name, e.last_name, r.title FROM employees JOIN roles r ON e.role_id = r.id JOIN departments d ON r.department_id = d.id AND dept_name= ?;
+
+-- get utilized budget from department
+SELECT d.dept_name AS department, SUM(r.salary) AS utilized_budget FROM employees e LEFT JOIN roles r ON r.id = e.role_id LEFT JOIN departments d ON r.department_id = d.id GROUP BY d.dept_name;
