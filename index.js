@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const util = require('util');
 const { Table } = require('console-table-printer');
+
 // create the connection
 const connection = mysql.createConnection({
 	host: 'localhost',
@@ -12,8 +13,10 @@ const connection = mysql.createConnection({
 	password: 'password',
 	database: 'my_employees'
 });
+
 // create promisify version of query
 const query = util.promisify(connection.query).bind(connection);
+const query = util.promisify(db.query).bind(db);
 // create function that produces tables in console
 function consoleTable(rows) {
 	const table = new Table();
@@ -27,7 +30,7 @@ function start() {
 			{
 				type: 'list',
 				name: 'choice',
-				question: 'What would you like to do? ',
+				message: 'What would you like to do? ',
 				choices: [
 					'view all departments',
 					'view all roles',
@@ -51,7 +54,6 @@ function start() {
 			// create switch statement for choice selected
 			switch (response.choice) {
 				case 'view all departments':
-					console.log("departments!");
 					getQueryAll('departments');
 					break;
 				case 'view all roles':
