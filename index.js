@@ -16,7 +16,6 @@ const connection = mysql.createConnection({
 
 // create promisify version of query
 const query = util.promisify(connection.query).bind(connection);
-const query = util.promisify(db.query).bind(db);
 // create function that produces tables in console
 function consoleTable(rows) {
 	const table = new Table();
