@@ -1,4 +1,4 @@
-# EDM_Employee_Database_Manager
+# Employee Database Manager (EDM)
 
 ## Description
 
