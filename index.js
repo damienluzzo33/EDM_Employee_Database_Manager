@@ -123,12 +123,21 @@ async function queryAllFrom(tableSelection) {
 async function addDataTo(tableSelection, params) {
 	try {
 		if (tableSelection == 'employees') {
-			const { firstName, lastName, roleId, managerId } = params;
+			const { firstName, lastName, role, manager } = params;
+			let roleIdArr = await query('SELECT id FROM roles WHERE title=?', [role]);
+			let roleId = roleIdArr[0].id;
+			let managerNameArr = manager.split(' ');
+			let managerFirst = managerNameArr[0];
+			let managerLast = managerNameArr[1];
+			let managerIdArr = await query('SELECT id FROM employees WHERE first_name=? AND last_name=?', [managerFirst, managerLast]);
+			let managerId = managerIdArr[0].id;
 			await query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`, [firstName, lastName, roleId, managerId]);
 			const rows = await query(selectEmployees);
 			consoleTable(rows);
 		} else if (tableSelection == 'roles') {
-			const { title, salary, departmentId } = params;
+			const { title, salary, department } = params;
+			let departmentIdArr = await query('SELECT id FROM departments WHERE dept_name=?', [department]);
+			let departmentId = departmentIdArr[0].id;
 			await query(`INSERT INTO roles (title, salary, department_id) VALUES (?,?,?);`, [title, salary, departmentId]);
 			const rows = await query(selectRoles);
 			consoleTable(rows);
@@ -274,24 +283,24 @@ async function queryBudgetsByDepartment() {
 	}
 }
 // create function for generalized text validation for text response questions
-function validatorText(response) {
+async function validatorText(response) {
 	// Make sure the response is not a number, and that it exists
 	let validation = response && isNaN(response) ? true : 'This response is required & it needs to be text! Try again!';
 	return validation;
 }
 // create function for generalized number validation for number response questions
-function validatorNumber(response) {
+async function validatorNumber(response) {
 	// Make sure the response is not a number, and that it exists
 	let validation =
 		response && !isNaN(response) ? true : 'This response is required & it need to be a number! Try again!';
 	return validation;
 }
 // create a function to run basic query select statements depending on the table being queried
-function getQueryAll(tableName) {
+async function getQueryAll(tableName) {
 	queryAllFrom(tableName);
 }
 // create function to add a department based on the data the user enters in the inquirer prompts
-function addDepartment() {
+async function addDepartment() {
 	inquirer
 		.prompt([
 			{
@@ -306,7 +315,8 @@ function addDepartment() {
 		});
 }
 // create function to add a role based on the data the user enters in the inquirer prompts
-function addRole() {
+async function addRole() {
+	let currentDepts = await getDeptNames();
 	inquirer
 		.prompt([
 			{
@@ -322,10 +332,9 @@ function addRole() {
 				validate: validatorNumber
 			},
 			{
-				type: 'input',
-				name: 'departmentId',
-				message: 'What department id does this role belong to? ',
-				validate: validatorNumber
+				type: 'list',
+				name: 'department',
+				choices: currentDepts
 			}
 		])
 		.then((response) => {
@@ -333,7 +342,9 @@ function addRole() {
 		});
 }
 // create function to add a role based on the data the user enters in the inquirer prompts
-function addEmployee() {
+async function addEmployee() {
+	let currentRoles = await getRoleTitles();
+	let currentManagers = await getManagerNames();
 	inquirer
 		.prompt([
 			{
@@ -349,16 +360,14 @@ function addEmployee() {
 				validate: validatorText
 			},
 			{
-				type: 'input',
-				name: 'roleId',
-				message: 'What role id does this employee belong to? ',
-				validate: validatorNumber
+				type: 'list',
+				name: 'role',
+				choices: currentRoles
 			},
 			{
-				type: 'input',
-				name: 'managerId',
-				message: 'What manager id does this employee belong to? ',
-				validate: validatorNumber
+				type: 'list',
+				name: 'manager',
+				choices: currentManagers
 			}
 		])
 		.then((response) => {
@@ -496,3 +505,5 @@ function utilizedBudget() {
 }
 // initialize the application
 start();
+
+// PRETTY MUCH 500 LINES OF CODE!

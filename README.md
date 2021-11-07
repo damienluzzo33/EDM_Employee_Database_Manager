@@ -10,9 +10,9 @@ You don't need anything special to get this app up and running for yourself. Sim
 
 If you are interested in improving or modifying this application for your own personal usage, please go ahead and clone down the repository and transform it into your own amazing employee database management application.
 
-[Link to video demo of app]()
+[Link to video demo of app](https://drive.google.com/file/d/1phzGNOFIaAyhKt32A2bgqo7njCB4Kpok/view)
 
-![Giphy demo of project]()
+![Giphy demo of project](./images/edm_demo2.gif)
 
 ## Table of Contents
 
@@ -38,14 +38,6 @@ If you are interested in improving or modifying this application for your own pe
 - Next, you will need to seed the database by either repeating the copy and paste method using MySQL Workbench or by running SOURCE db/seeds.sql from the mysql command line. 
 
 - Now you can get the application running by quitting out of mysql with "quit". Then you can get start it up by typing "node index.js" into your command line. From there you will be prompted with options with what you'd like to do with your database.
-
-Screenshots:
-
-Desktop:
-![Desktop view of application](assets/images/new_screenshot_dexktop_view.png)
-
-Mobile:
-![Mobile view of application](assets/images/new_screenshot_mobile_view.png)
 
 ## Credits
 
