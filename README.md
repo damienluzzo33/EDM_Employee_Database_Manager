@@ -2,11 +2,11 @@
 
 ## Description
 
-The work of a business owner can be tough. Whether you own a 5-star hotel, are leading a software development team, or keeping trak of your fantasy football team, a good owner needs to know who their employees are, what they are responsible for, and what department they work within. Many owners will also need to keep track of management hierarchy, recently hired employees, etc. With so much to keep track of, what can an owner do to stay on top of it all. This is where EDM steps in.
+The work of a business owner can be tough. Whether you own a 5-star hotel, are leading a software development team, or keeping trak of your fantasy football team, a good owner needs to know who their employees are, what they are responsible for, and what department they work within. Many owners will also need to keep track of management hierarchy, recently hired employees, etc. With so much to keep track of, what can an owner do to stay on top of it all? This is where EDM steps in.
 
-EDM is an employee database manager that allows you to get information about employees, to modify employee roles, to remove employees, and even keep track of your hiring expenses. This application was developed for anyone looking to get organized and to view and modify employee data on demand. 
+EDM is an employee database manager that allows you to get information about their employees, to modify their employee roles, to remove employees, and even keep track of their hiring expenses. This application was developed for anyone looking to get organized and to finally have the ability view and modify employee data on demand. 
 
-You don't need anything special to get this app up and running for yourself. Simply grab MySQL and this repository and put them on your local system, then open up the command line and let the magic happen. Tired of paperwork? Are you "over it" when it comes to organizing employee data. This app will efficiently and effectively ease your organizational frustrations.
+You don't need anything special to get this app up and running for yourself. Simply grab MySQL and this repository and put them on your local system, then open up the command line and let the magic happen. Tired of paperwork? Are you "over it" when "it" comes to organizing employee data? This app will efficiently and effectively ease your organizational frustrations.
 
 If you are interested in improving or modifying this application for your own personal usage, please go ahead and clone down the repository and transform it into your own amazing employee database management application.
 
